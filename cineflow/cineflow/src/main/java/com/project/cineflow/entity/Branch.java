@@ -10,22 +10,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Movie {
+public class Branch {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="movie_id")
+    @Column(name="branch_id")
     private int id;
 
-    @Column(name="movie_name")
-    private String movieName;
+    @Column(name="branch_name")
+    private String branchName;
 
-    @Column(name="description")
-    private String description;
-
-    @Column(name="poster")
-    private String poster;
-
-    @Column(name="branch_id")
-    private Branch branch;
+    @Column(name="location")
+    private String location;
 
 }

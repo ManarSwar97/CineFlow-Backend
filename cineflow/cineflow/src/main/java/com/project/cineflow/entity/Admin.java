@@ -10,22 +10,27 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Movie {
+public class Admin {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="movie_id")
+    @Column(name="user_id")
     private int id;
 
-    @Column(name="movie_name")
-    private String movieName;
+    @Column(name="first_name")
+    private String firstName;
 
-    @Column(name="description")
-    private String description;
+    @Column(name="last_name")
+    private String lastName;
 
-    @Column(name="poster")
-    private String poster;
+    @Column(name="username")
+    private String username;
 
-    @Column(name="branch_id")
-    private Branch branch;
+    @Column(name="image")
+    private String image;
+
+    @Column(name="password")
+    private String password;
+
+
 
 }
