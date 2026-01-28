@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Booking {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="booking_id")
     private int id;
@@ -28,7 +30,7 @@ public class Booking {
     private int ticketCount;
 
     @Column(name="status")
-    private String Status;
+    private String status;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;

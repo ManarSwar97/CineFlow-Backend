@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Movie {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="movie_id")
     private int id;
@@ -26,7 +28,6 @@ public class Movie {
     private String poster;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    @Column(name = "showtime_list")
     private List<Showtime> showtimeList;
 
     @ManyToOne
@@ -34,7 +35,7 @@ public class Movie {
     private Branch branch;
 
     @ManyToOne
-    @JoinColumn(name="admin")
+    @JoinColumn(name="admin_id")
     private Admin admin;
 
 }

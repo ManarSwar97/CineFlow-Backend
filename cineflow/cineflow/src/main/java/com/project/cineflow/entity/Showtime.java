@@ -5,16 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Showtime {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="showtime_id")
     private int id;
 
-    @Column(name="movie_id")
+    @ManyToOne
+    @JoinColumn(name="movie_id")
     private Movie movie;
 
     @Column(name="capacity")
