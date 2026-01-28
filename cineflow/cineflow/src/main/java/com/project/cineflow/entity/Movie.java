@@ -1,11 +1,11 @@
 package com.project.cineflow.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,7 +25,16 @@ public class Movie {
     @Column(name="poster")
     private String poster;
 
-    @Column(name="branch_id")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @Column(name = "showtime_list")
+    private List<Showtime> showtimeList;
+
+    @ManyToOne
+    @JoinColumn(name="branch_id")
     private Branch branch;
+
+    @ManyToOne
+    @JoinColumn(name="admin")
+    private Admin admin;
 
 }

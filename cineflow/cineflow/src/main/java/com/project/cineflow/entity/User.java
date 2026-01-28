@@ -1,11 +1,11 @@
 package com.project.cineflow.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -30,6 +30,10 @@ public class User {
 
     @Column(name="password")
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Column(name="booking_list")
+    private List<Booking> booking;
 
 
 

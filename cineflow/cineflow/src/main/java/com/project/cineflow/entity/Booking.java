@@ -1,8 +1,6 @@
 package com.project.cineflow.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,10 +16,12 @@ public class Booking {
     @Column(name="booking_id")
     private int id;
 
-    @Column(name="user_id")
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
 
-    @Column(name="showtime_id")
+    @ManyToOne
+    @JoinColumn(name="showtime_id")
     private Showtime showtime;
 
     @Column(name="ticket_count")
