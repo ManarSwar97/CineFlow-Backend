@@ -1,4 +1,4 @@
 package com.project.cineflow.interfaces;
 
-public interface UserInterface {
+public interface JWTService {
 }

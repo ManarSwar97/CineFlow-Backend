@@ -1,5 +1,5 @@
 package com.project.cineflow.service;
-import com.project.cineflow.interfaces.UserInterface;
+import com.project.cineflow.interfaces.JWTService;
 import com.project.cineflow.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Service
 @AllArgsConstructor
-public class CustomUserDetailsService implements UserInterface {
+public class JWTServiceImp implements JWTService {
 
     private final UserRepository userRepository;
 
