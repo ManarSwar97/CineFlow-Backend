@@ -1,6 +1,7 @@
 package com.project.cineflow.service;
 
 import com.project.cineflow.dto.JwtAuthenticationResponse;
+import com.project.cineflow.dto.RefreshTokenRequest;
 import com.project.cineflow.dto.SignInRequest;
 import com.project.cineflow.dto.SignUpRequest;
 import com.project.cineflow.entity.User;
@@ -48,4 +49,35 @@ public class AuthenticationServiceImp implements AuthenticationService{
         return jwtAuthenticationResponse;
 
     }
+
+
+    public JwtAuthenticationResponse refreshToken(RefreshTokenRequest request){
+
+        System.out.println("REFRESH TOKEN RECEIVED: " + request.getToken());
+
+        String token = request.getToken();
+
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
+        String userEmail = jwtService.extractUsername(token);
+
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if(jwtService.isValidToken(token, user)){
+
+            var newAccessToken = jwtService.generateToken(user);
+
+            JwtAuthenticationResponse response = new JwtAuthenticationResponse();
+            response.setToken(newAccessToken);
+            response.setRefreshToken(token);
+
+            return response;
+        }
+
+        throw new RuntimeException("Invalid refresh token");
+    }
+
 }

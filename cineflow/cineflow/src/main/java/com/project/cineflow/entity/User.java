@@ -32,7 +32,7 @@ public class User implements UserDetails {
     @Column(name="last_name")
     private String lastName;
 
-    @Column
+    @Column(name="email")
     private String email;
 
     @Column(name="username")
@@ -73,5 +73,11 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
 
 }

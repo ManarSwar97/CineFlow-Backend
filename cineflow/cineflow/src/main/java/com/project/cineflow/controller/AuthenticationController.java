@@ -1,6 +1,7 @@
 package com.project.cineflow.controller;
 
 import com.project.cineflow.dto.JwtAuthenticationResponse;
+import com.project.cineflow.dto.RefreshTokenRequest;
 import com.project.cineflow.dto.SignInRequest;
 import com.project.cineflow.dto.SignUpRequest;
 import com.project.cineflow.entity.User;
@@ -28,5 +29,10 @@ public class AuthenticationController {
     @PostMapping("/signin")
     public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SignInRequest signInRequest){
         return ResponseEntity.ok(authenticationService.signin(signInRequest));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<JwtAuthenticationResponse> refresh(@RequestBody RefreshTokenRequest refreshTokenRequest){
+        return ResponseEntity.ok(authenticationService.refreshToken(refreshTokenRequest));
     }
 }

@@ -1,4 +1,5 @@
 package com.project.cineflow.service;
+import com.project.cineflow.entity.User;
 import com.project.cineflow.interfaces.JWTService;
 import com.project.cineflow.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -35,12 +36,18 @@ public class JWTServiceImp implements JWTService {
     }
 
     public String generateRefreshToken(Map<String, Object> extraClaims, UserDetails userDetails){
-        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
+
+        String email = ((User) userDetails).getEmail();
+
+        return Jwts.builder()
+                .setClaims(extraClaims)
+                .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 604800000))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
 
 
     //get particular claim
@@ -56,7 +63,7 @@ public class JWTServiceImp implements JWTService {
 
     //get all the claims from the token
     private Claims extractAllClaims(String token){
-        return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(jwtsecret).getBody();
+        return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token).getBody();
     }
 
 
@@ -67,9 +74,12 @@ public class JWTServiceImp implements JWTService {
     }
 
     public boolean isValidToken(String token, UserDetails userDetails){
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && isTokenExpired(token));
+        final String email = extractUsername(token);
+
+        return email.equals(((User) userDetails).getEmail())
+                && !isTokenExpired(token);
     }
+
 
     private boolean isTokenExpired(String token){
         return extractClaim(token, Claims::getExpiration).before(new Date());
