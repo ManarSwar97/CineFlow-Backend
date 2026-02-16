@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="user")
+@Table(name="users")
 public class User implements UserDetails {
 
     @Id
@@ -31,6 +31,9 @@ public class User implements UserDetails {
 
     @Column(name="last_name")
     private String lastName;
+
+    @Column
+    private String email;
 
     @Column(name="username")
     private String username;
